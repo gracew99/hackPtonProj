@@ -16,8 +16,16 @@ form {
 }
 
 #map {
+  float:left;
   height: 100%;
   width: 80%;
+}
+#panel{
+  float:right;
+  height: 100%;
+  width: 20%;
+
+
 }
 
 /* Optional: Makes the sample page fill the window. */

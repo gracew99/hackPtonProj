@@ -11,9 +11,17 @@
        * element that contains the map. */
 
     </style>
+
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   </head>
 
@@ -32,13 +40,9 @@
       </div>
     </nav>
 
-    <div id="map">
+    <div id="map"> </div>
+    <div id="panel"> Panel </div>
 
-    </div>
-    <div class="bottom">
-      <p id = "form"> </p>
-
-    </div>
 
     <script type="text/javascript">
       var map;
@@ -46,6 +50,7 @@
         lat: -34.397,
         lng: 150.64
       };
+
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: center,
@@ -53,35 +58,42 @@
         });
         onClick();
       }
-      function onClick(){
+
+      function onClick() {
         google.maps.event.addListener(map, 'click', function(event) {
           displayMenu(event.latLng);
         });
 
       }
-      function displayMenu(location){
-          var person = prompt("Please enter the food description. You may optionally"+
+
+      function displayMenu(location) {
+        var person = prompt("Please enter the food description. You may optionally" +
           " choose to include details such as contact information.");
-          if (person!=null){
-            document.getElementById('form').innerHTML+= (person + '<br>');
-            placeMarker(location)
-          }
+        if (person != null) {
+          //document.getElementById('panel').innerHTML+= (person + '<br>');
+          placeMarker(location, person)
+        }
 
       }
-      function placeMarker(location){
+
+      function placeMarker(location, prompt) {
         var marker = new google.maps.Marker({
           position: location,
           map: map
         });
-        marker.addListener('click', makePost);
+        marker.addListener('click', function() {
+          makePost(prompt)
+        });
       }
-      function makePost(){
-        document.getElementById('form').innerHTML=
-        '<div class="panel panel-default">'+
-        '<div class="panel-body">'+
-        'Basic panel example'+
-        '</div>'+
-        '</div>'
+
+      function makePost(text) {
+
+        document.getElementById('panel').innerHTML =
+          '<div class="panel panel-default">' +
+          '<div class="panel-body">' +
+          text +
+          '</div>' +
+          '</div>'
       }
 
     </script>
