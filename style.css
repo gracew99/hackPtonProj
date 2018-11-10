@@ -1,0 +1,36 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+main {
+  padding: 1em 2em;
+}
+
+form {
+  max-width: 20em;
+}
+
+#map {
+  height: 100%;
+  width: 80%;
+}
+
+/* Optional: Makes the sample page fill the window. */
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#logo {
+  height: 10%;
+  width: 10%;
+  border-radius: 100px;
+}
