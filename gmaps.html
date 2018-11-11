@@ -85,14 +85,28 @@
         });
       }
 
+      var i = 0;
+
       function makePost(text) {
 
-        document.getElementById('panel').innerHTML =
-          '<div class="panel panel-default">' +
-          '<div class="panel-body">' +
-          text +
-          '</div>' +
-          '</div>'
+        var firebaseListingRef = firebase.database().ref().child(i);
+        firebaseListingRef.on('value', function(child){
+           text = child.val(); //user's text
+
+           document.getElementById('panel').innerHTML +=
+           '<div class="panel panel-default">' +
+           '<div class="panel-body">' +
+           '<div id="listing">' + text+
+           '</div>' +
+           '</div>' +
+           '</div>'
+        });
+
+        submitClick(i);
+        i++;
+
+
+
       }
 
     </script>
@@ -101,7 +115,7 @@
         <div class="mainDiv" align = "right">
           <h1 align - "left"> Listings </h1>
           <textarea id = "mainText" placeholder = "Enter text here"></textarea>
-          <button id = "submit" onclick="submitClick()"> <i class = "fa fa-arrow-right" aria-hidden = "true"> </i></button>
+          <button id = "submit" > <i class = "fa fa-arrow-right" aria-hidden = "true"> </i></button>
         </div>
   </div>
 
@@ -124,21 +138,3 @@
   </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
