@@ -62,58 +62,37 @@
 
       function onClick() {
         google.maps.event.addListener(map, 'click', function(event) {
-          displayMenu(event.latLng);
+          placeMarker(event.latLng);
         });
 
       }
 
-      function displayMenu(location) {
-        var person = prompt("Please enter the food description. You may optionally" +
-          " choose to include details such as contact information.");
-        if (person != null) {
-          //document.getElementById('panel').innerHTML+= (person + '<br>');
-          placeMarker(location, person)
-        }
 
-      }
 
-      function placeMarker(location, prompt) {
+      function placeMarker(location) {
         var marker = new google.maps.Marker({
           position: location,
           map: map
         });
         marker.addListener('click', function() {
-          makePost(prompt)
+          submitClick(i);
+          i+=1;
         });
-      }
-
-
-      function makePost(text) {
-        var firebaseListingRef = firebase.database().ref().child(i);
-        //console.log(firebaseListingRef);
-
-        firebaseListingRef.on('child_added', function(snapshot, prevChildKey){
-           text = snapshot.val(); //user's text
-           document.getElementById('panel').innerHTML +=
-           '<div class="panel panel-default">' +
-           '<div class="panel-body">' +
-           '<div id="listing">' + text+
-           '</div>' +
-           '</div>' +
-           '</div>'
-        });
-
-        submitClick(i);
-        i++;
       }
 
     </script>
+
   <div id="panel">
 
         <div class="mainDiv" align = "right">
           <h1 align - "left"> Listings </h1>
           <textarea id = "mainText" placeholder = "Enter text here"></textarea>
           <button id = "submit" > <i class = "fa fa-arrow-right" aria-hidden = "true"> </i></button>
+
+            <!--<div class="panel panel-default">-->
+            <div class="panel-body" id = "panela"> Listing 1 </div>
+
+
         </div>
   </div>
 
@@ -130,7 +109,10 @@
       };
       firebase.initializeApp(config);
     </script>
+
     <script src = "fbindex.js"></script>
+
+
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJoMMb8Tf-ExTcWvjF8uLCc0ORwzg3gHQ&callback=initMap" async defer></script>
   </body>

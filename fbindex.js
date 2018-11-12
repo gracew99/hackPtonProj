@@ -1,19 +1,13 @@
 
+function submitClick(i){
+var person = prompt("Description");
 
+//stores value from website in database
+var firebaseRef = firebase.database().ref().child(i); //path to root object
+firebaseRef.set(person); //set value to firebaseref
 
+//update in database will update the webpage
+var bigOne = document.getElementById('panela');
+firebaseRef.on('value', snap =>bigOne.innerText = snap.val());
 
-
-
-
-
-
-var mainText = document.getElementById("mainText");
-var submitBtn = document.getElementById("submit");
-
-
-
-function submitClick(int){
-  var firebaseRef = firebase.database().ref().child(int); //path to root object
-  var messageText = mainText.value;
-  firebaseRef.set(messageText); //set value to firebaseref
 }
